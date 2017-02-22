@@ -16,7 +16,7 @@
 /*
  * Apache 2.0 license is applied. Using Philip Helgers template for validating.
  */
-package org.validool.xmlvalidator;
+package eu.cen.en16931.xmlvalidator;
 
 import java.io.File;
 import java.io.IOException;

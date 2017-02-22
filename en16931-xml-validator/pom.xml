@@ -26,10 +26,6 @@
   </parent>
   <artifactId>en16931-xml-validator</artifactId>
   <packaging>jar</packaging>
-  <organization>
-    <name>validool.org</name>
-    <url>http://www.validool.org</url>
-  </organization>
   <build>
     <plugins>
       <plugin>
@@ -40,7 +36,7 @@
           </descriptorRefs>
           <archive>
             <manifest>
-              <mainClass>org.validool.xmlvalidator.XMLValidator</mainClass>
+              <mainClass>eu.cen.en16931.xmlvalidator.XMLValidator</mainClass>
             </manifest>
           </archive>
         </configuration>
