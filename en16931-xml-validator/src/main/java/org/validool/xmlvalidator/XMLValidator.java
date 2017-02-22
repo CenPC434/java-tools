@@ -140,23 +140,25 @@ public final class XMLValidator
 
     if (!argsValid)
     {
-      logger.info ("Usage XSD mode:  java -jar xmlvalidator-1.0-SNAPSHOT-jar-with-dependencies.jar -xml instance.xml -xsd schema.xsd");
-      logger.info ("Schematron mode: java -jar xmlvalidator-1.0-SNAPSHOT-jar-with-dependencies.jar -xml instance.xml -sch schematron.sch [result.svrl]");
+      final String sJarName = "en16931-xml-validator-x.y.z-jar-with-dependencies.jar";
+      logger.info ("Usage XSD mode:  java -jar " + sJarName + " -xml instance.xml -xsd schema.xsd");
+      logger.info ("Schematron mode: java -jar " + sJarName + " -xml instance.xml -sch schematron.sch [result.svrl]");
       if (!pureMode)
-        logger.info ("Schematron mode: java -jar xmlvalidator-1.0-SNAPSHOT-jar-with-dependencies.jar -xml instance.xml -xslt schematron.xslt [result.svrl]");
+        logger.info ("Schematron mode: java -jar " +
+                     sJarName +
+                     " -xml instance.xml -xslt schematron.xslt [result.svrl]");
       return;
     }
 
     logger.info ("=========================================");
-    System.out.print ("Starting validation against ");
     if (xsdMode)
     {
-      logger.info ("schema");
+      logger.info ("Starting validation against XML Schema");
       logger.info ("Result: " + validateXMLSchema (xsdFile, xmlFile));
     }
     else
     {
-      logger.info ("schematron");
+      logger.info ("Starting validation against Schematron");
       logger.info ("Result: " + validateXMLSchematron (schFile, schXsltMode, xmlFile, svrlFile));
     }
     logger.info ("Finished.");

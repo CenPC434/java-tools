@@ -59,6 +59,12 @@
       <email>ph(at)helger.com</email>
       <url>http://www.helger.com</url>
     </developer>
+    <developer>
+      <id>ap</id>
+      <name>Andreas Pelekies</name>
+      <email>andreas.pelekies(at)validool.org</email>
+      <url>http://www.validool.org</url>
+    </developer>
   </developers>
 
   <properties>
