@@ -21,7 +21,7 @@
   <parent>
     <groupId>com.helger.en16931</groupId>
     <artifactId>en16931-parent-pom</artifactId>
-    <version>0.1.0</version>
+    <version>0.2.0-SNAPSHOT</version>
   </parent>
   <artifactId>en16931-xml-validator</artifactId>
   <packaging>jar</packaging>
