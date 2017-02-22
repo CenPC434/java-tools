@@ -49,7 +49,7 @@
   </scm>
 
   <organization>
-    <name>Philip Helger</name>
+    <name>CEN TC/434 - EN 16931</name>
     <url>http://www.helger.com</url>
   </organization>
 
@@ -95,50 +95,22 @@
 
       <dependency>
         <groupId>com.helger</groupId>
-        <artifactId>peppol-commons</artifactId>
+        <artifactId>en16931-xml-validator</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>
         <groupId>com.helger</groupId>
-        <artifactId>peppol-testfiles</artifactId>
+        <artifactId>en16931-edifact-to-xml</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>
         <groupId>com.helger</groupId>
-        <artifactId>peppol-sbdh</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>com.helger</groupId>
-        <artifactId>peppol-sml-client</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>com.helger</groupId>
-        <artifactId>peppol-smp-client</artifactId>
+        <artifactId>en16931-edifact-xml</artifactId>
         <version>${project.version}</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
 
-  <dependencies>
-    <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-api</artifactId>
-    </dependency>
-
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-simple</artifactId>
-      <scope>test</scope>
-    </dependency>
-  </dependencies>
-  
   <modules>
     <module>en16931-xml-validator</module>
     <module>en16931-edifact-to-xml</module>

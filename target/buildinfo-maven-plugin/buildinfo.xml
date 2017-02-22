@@ -79,35 +79,11 @@
   <map key="build.plugin.10.artifactid" value="maven-deploy-plugin" />
   <map key="build.plugin.10.version" value="2.8.2" />
   <map key="build.plugin.10.key" value="org.apache.maven.plugins:maven-deploy-plugin" />
-  <map key="dependency.count" value="3" />
-  <map key="dependency.0.groupid" value="org.slf4j" />
-  <map key="dependency.0.artifactid" value="slf4j-api" />
-  <map key="dependency.0.version" value="1.7.21" />
-  <map key="dependency.0.type" value="jar" />
-  <map key="dependency.0.scope" value="compile" />
-  <map key="dependency.0.optional" value="false" />
-  <map key="dependency.0.managementkey" value="org.slf4j:slf4j-api:jar" />
-  <map key="dependency.0.exclusion.count" value="0" />
-  <map key="dependency.1.groupid" value="junit" />
-  <map key="dependency.1.artifactid" value="junit" />
-  <map key="dependency.1.version" value="4.12" />
-  <map key="dependency.1.type" value="jar" />
-  <map key="dependency.1.scope" value="test" />
-  <map key="dependency.1.optional" value="false" />
-  <map key="dependency.1.managementkey" value="junit:junit:jar" />
-  <map key="dependency.1.exclusion.count" value="0" />
-  <map key="dependency.2.groupid" value="org.slf4j" />
-  <map key="dependency.2.artifactid" value="slf4j-simple" />
-  <map key="dependency.2.version" value="1.7.21" />
-  <map key="dependency.2.type" value="jar" />
-  <map key="dependency.2.scope" value="test" />
-  <map key="dependency.2.optional" value="false" />
-  <map key="dependency.2.managementkey" value="org.slf4j:slf4j-simple:jar" />
-  <map key="dependency.2.exclusion.count" value="0" />
-  <map key="build.datetime" value="2017-02-22T07:16:26.569" />
-  <map key="build.datetime.millis" value="1487744186569" />
+  <map key="dependency.count" value="0" />
+  <map key="build.datetime" value="2017-02-22T07:33:20.324" />
+  <map key="build.datetime.millis" value="1487745200324" />
   <map key="build.datetime.date" value="2017-02-22" />
-  <map key="build.datetime.time" value="07:16:26.569" />
+  <map key="build.datetime.time" value="07:33:20.324" />
   <map key="build.datetime.timezone" value="Europe/Berlin" />
   <map key="build.datetime.timezone.offsethours" value="1" />
   <map key="build.datetime.timezone.offsetmins" value="60" />
