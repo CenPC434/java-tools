@@ -47,6 +47,5 @@ A generic XML validator that supports validation of XML files against arbitrary 
 </dependency>
 ```
 
-
 ---
 Contact: if you have any questions, send a mail to en16931[at]helger[dot]com
