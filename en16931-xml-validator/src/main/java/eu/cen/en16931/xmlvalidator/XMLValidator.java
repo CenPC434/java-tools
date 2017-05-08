@@ -21,17 +21,16 @@ package eu.cen.en16931.xmlvalidator;
 import java.io.File;
 import java.io.IOException;
 
-import javax.xml.transform.stream.StreamSource;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import javax.xml.validation.Validator;
 
-import org.apache.log4j.ConsoleAppender;
-import org.apache.log4j.FileAppender;
-import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
-import org.apache.log4j.SimpleLayout;
 import org.oclc.purl.dsdl.svrl.SchematronOutputType;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.xml.sax.SAXException;
 
+import com.helger.commons.annotation.Nonempty;
 import com.helger.commons.collection.ext.ICommonsList;
 import com.helger.commons.io.resource.FileSystemResource;
 import com.helger.schematron.ISchematronResource;
@@ -43,177 +42,190 @@ import com.helger.schematron.svrl.SVRLMarshaller;
 import com.helger.schematron.xslt.SchematronResourceSCH;
 import com.helger.schematron.xslt.SchematronResourceXSLT;
 import com.helger.xml.schema.XMLSchemaCache;
+import com.helger.xml.transform.TransformSourceFactory;
 
 /**
  * @author Andreas Pelekies (andreas.pelekies(at)validool.org)
+ * @author Philip Helger
  */
 public final class XMLValidator
 {
-  private static final Logger logger = Logger.getRootLogger ();
-  private static final boolean pureMode = false;
+  private static final Logger s_aLogger = LoggerFactory.getLogger (XMLValidator.class);
+
+  private static enum EMode
+  {
+    XSD ("XML schema"),
+    PURE ("Pure Schematron"),
+    SCH ("Schematron"),
+    XSLT ("XSLT");
+
+    private final String m_sName;
+
+    private EMode (@Nonnull @Nonempty final String sName)
+    {
+      m_sName = sName;
+    }
+
+    @Nonnull
+    @Nonempty
+    public String getDisplayName ()
+    {
+      return m_sName;
+    }
+
+    public boolean isSchematronBased ()
+    {
+      return this == SCH || this == XSLT || this == PURE;
+    }
+  }
 
   public static void main (final String [] args)
   {
-    try
-    {
-      final SimpleLayout layout = new SimpleLayout ();
-      final ConsoleAppender consoleAppender = new ConsoleAppender (layout);
-      logger.addAppender (consoleAppender);
-      final FileAppender fileAppender = new FileAppender (layout, "log.txt", false);
-      logger.addAppender (fileAppender);
-      // ALL | DEBUG | INFO | WARN | ERROR | FATAL | OFF:
-      logger.setLevel (Level.WARN);
-    }
-    catch (final Exception ex)
-    {
-      logger.info (ex);
-    }
+    File xmlFile = null;
+    EMode eMode = null;
+    File ruleFile = null;
+    File svrlFile = null;
 
-    boolean argsValid = true;
-    boolean xsdMode = false;
-    boolean schMode = false;
-    boolean schXsltMode = false;
-    String xmlFile = null;
-    String xsdFile = null;
-    String schFile = null;
-    String svrlFile = "result.svrl";
-
-    if (argsValid && args.length < 4)
+    if (args.length >= 2)
     {
-      argsValid = false;
-    }
-    if (argsValid && args[0].equals ("-xml"))
-    {
-      final File f = new File (args[1]);
-      if (!f.exists () || f.isDirectory ())
+      final String sType = args[0];
+      final String sValue = args[1];
+      if (sType.equals ("-xml"))
       {
-        logger.info ("The xml instance file does not exist.");
-        argsValid = false;
+        final File f = new File (sValue);
+        if (f.exists () && f.isFile ())
+          xmlFile = f;
+        else
+          s_aLogger.error ("The xml instance file '" + sValue + "' does not exist.");
       }
       else
-      {
-        xmlFile = args[1];
-      }
-    }
-    else
-    {
-      argsValid = false;
-    }
-    if (argsValid && args[2].equals ("-xsd"))
-    {
-      final File f = new File (args[3]);
-      xsdMode = true;
-      if (!f.exists () || f.isDirectory ())
-      {
-        logger.info ("The schema file does not exist.");
-        argsValid = false;
-      }
-      else
-      {
-        xsdFile = args[3];
-      }
-    }
-    if (argsValid && (args[2].equals ("-sch") || args[2].equals ("-xslt")))
-    {
-      final File f = new File (args[3]);
-      schMode = true;
-      schXsltMode = args[2].equals ("-xslt");
-      if (!f.exists () || f.isDirectory ())
-      {
-        logger.info ("The schematron file does not exist.");
-        argsValid = false;
-      }
-      else
-      {
-        schFile = args[3];
-        if (args.length >= 5)
-        {
-          // Optional SVRL filename - defaults to "result.svrl"
-          svrlFile = args[4];
-        }
-      }
-    }
-    if (!schMode && !xsdMode)
-    {
-      argsValid = false;
+        s_aLogger.error ("Invalidate file type '" + sType + "' provided (try '-xml').");
     }
 
-    if (!argsValid)
+    if (args.length >= 4)
+    {
+      final String sType = args[2];
+      final String sValue = args[3];
+
+      if (sType.equals ("-xsd"))
+        eMode = EMode.XSD;
+      else
+        if (sType.equals ("-sch"))
+          eMode = EMode.SCH;
+        else
+          if (sType.equals ("-xslt"))
+            eMode = EMode.XSLT;
+          else
+            if (sType.equals ("-pure"))
+              eMode = EMode.PURE;
+      if (eMode != null)
+      {
+        final File f = new File (sValue);
+        if (f.exists () && f.isFile ())
+          ruleFile = f;
+        else
+          s_aLogger.error ("The " + eMode.getDisplayName () + " file '" + sValue + "' does not exist.");
+      }
+      else
+        s_aLogger.error ("Invalid validation mode '" + sType + "' provided.");
+    }
+
+    if (args.length >= 6)
+    {
+      final String sType = args[4];
+      final String sValue = args[5];
+
+      if (sType.equals ("-svrl") && eMode != null && eMode.isSchematronBased ())
+      {
+        final File f = new File (sValue);
+        if (!f.exists () || f.isFile ())
+          svrlFile = f;
+        else
+          s_aLogger.error ("The SVRL file '" + sValue + "' does not exist.");
+      }
+      else
+        s_aLogger.error ("Invalid optional type '" + sType + "' provided.");
+    }
+
+    if (xmlFile == null || eMode == null || ruleFile == null)
     {
       final String sJarName = "en16931-xml-validator-x.y.z-jar-with-dependencies.jar";
-      logger.info ("Usage XSD mode:  java -jar " + sJarName + " -xml instance.xml -xsd schema.xsd");
-      logger.info ("Schematron mode: java -jar " + sJarName + " -xml instance.xml -sch schematron.sch [result.svrl]");
-      if (!pureMode)
-        logger.info ("Schematron mode: java -jar " +
-                     sJarName +
-                     " -xml instance.xml -xslt schematron.xslt [result.svrl]");
+      s_aLogger.info ("Usage        XSD mode: java -jar " + sJarName + " -xml instance.xml -xsd schema.xsd");
+      s_aLogger.info ("Schematron plain mode: java -jar " +
+                      sJarName +
+                      " -xml instance.xml -sch schematron.sch [-svrl result.svrl]");
+      s_aLogger.info ("            XSLT mode: java -jar " +
+                      sJarName +
+                      " -xml instance.xml -xslt schematron.xslt [-svrl result.svrl]");
+      s_aLogger.info (" Pure Schematron mode: java -jar " +
+                      sJarName +
+                      " -xml instance.xml -pure schematron.xslt [-svrl result.svrl]");
       return;
     }
 
-    logger.info ("=========================================");
-    if (xsdMode)
+    s_aLogger.info ("=========================================");
+    if (eMode == EMode.XSD)
     {
-      logger.info ("Starting validation against XML Schema");
-      logger.info ("Result: " + validateXMLSchema (xsdFile, xmlFile));
+      s_aLogger.info ("Starting validation against XML Schema");
+      s_aLogger.info ("Result: " + validateXMLSchema (ruleFile, xmlFile));
     }
     else
     {
-      logger.info ("Starting validation against Schematron");
-      logger.info ("Result: " + validateXMLSchematron (schFile, schXsltMode, xmlFile, svrlFile));
+      s_aLogger.info ("Starting validation against Schematron");
+      s_aLogger.info ("Result: " + validateXMLSchematron (ruleFile, eMode, xmlFile, svrlFile));
     }
-    logger.info ("Finished.");
-    logger.info ("=========================================");
-
+    s_aLogger.info ("Finished.");
+    s_aLogger.info ("=========================================");
   }
 
-  public static boolean validateXMLSchema (final String xsdPath, final String xmlPath)
+  public static boolean validateXMLSchema (@Nonnull final File xsdPath, @Nonnull final File xmlPath)
   {
-
     try
     {
       System.setProperty ("jdk.xml.maxOccurLimit", "9999999");
-      final Validator validator = XMLSchemaCache.getInstance ().getValidator (new FileSystemResource (xsdPath));
-      validator.validate (new StreamSource (new File (xmlPath)));
+      final Validator aValidator = XMLSchemaCache.getInstance ().getValidator (new FileSystemResource (xsdPath));
+      aValidator.validate (TransformSourceFactory.create (xmlPath));
     }
-    catch (IOException | SAXException e)
+    catch (final IOException | SAXException e)
     {
-      logger.info ("Exception: " + e.getMessage ());
+      s_aLogger.info ("Exception: " + e.getMessage ());
       return false;
     }
     return true;
   }
 
-  public static boolean validateXMLSchematron (final String schPath,
-                                               final boolean schXsltMode,
-                                               final String xmlPath,
-                                               final String svrlPath)
+  public static boolean validateXMLSchematron (@Nonnull final File schPath,
+                                               @Nonnull final EMode eMode,
+                                               @Nonnull final File xmlPath,
+                                               @Nullable final File svrlPath)
   {
     final FileSystemResource aXML = new FileSystemResource (xmlPath);
     final FileSystemResource aSCH = new FileSystemResource (schPath);
 
     // Use pure implementation or XSLT to do the conversion?
-    final ISchematronResource aSchematron = pureMode ? new SchematronResourcePure (aSCH)
-                                                     : schXsltMode ? new SchematronResourceXSLT (aSCH)
-                                                                   : new SchematronResourceSCH (aSCH);
+    final ISchematronResource aSchematron = eMode == EMode.PURE ? new SchematronResourcePure (aSCH)
+                                                                : eMode == EMode.XSLT ? new SchematronResourceXSLT (aSCH)
+                                                                                      : new SchematronResourceSCH (aSCH);
     final SchematronOutputType aSOT = SchematronHelper.applySchematron (aSchematron, aXML);
     if (aSOT == null)
     {
-      logger.info ("Schematron file is malformed!");
+      s_aLogger.info ("Schematron file " + aSchematron + " is malformed!");
       return false;
     }
 
     // Write SVRL
-    new SVRLMarshaller (false).write (aSOT, new FileSystemResource (svrlPath));
+    if (svrlPath != null)
+      new SVRLMarshaller (false).write (aSOT, new FileSystemResource (svrlPath));
 
     final ICommonsList <SVRLFailedAssert> aFailedAsserts = SVRLHelper.getAllFailedAssertions (aSOT);
     if (aFailedAsserts.isNotEmpty ())
     {
-      logger.info ("XML does not comply to Schematron! See SVRL for details: " + svrlPath);
+      s_aLogger.info ("XML does not comply to Schematron!" +
+                      (svrlPath != null ? " See SVRL for details: " + svrlPath : ""));
       return false;
     }
 
-    logger.info ("XML complies to Schematron!");
+    s_aLogger.info ("XML complies to Schematron!");
     return true;
   }
-
 }

@@ -18,10 +18,8 @@ package com.helger.schematron;
 import java.io.File;
 import java.io.OutputStream;
 
-import org.apache.log4j.ConsoleAppender;
-import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
-import org.apache.log4j.SimpleLayout;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.helger.commons.io.file.FileHelper;
 import com.helger.schematron.svrl.CSVRL;
@@ -33,15 +31,14 @@ import com.helger.xml.namespace.MapBasedNamespaceContext;
 import com.helger.xml.serialize.write.XMLWriter;
 import com.helger.xml.serialize.write.XMLWriterSettings;
 
+import eu.cen.en16931.xmlvalidator.XMLValidator;
+
 public class MainCreateXSLTFromSchematron
 {
-  private static final Logger logger = Logger.getRootLogger ();
+  private static final Logger logger = LoggerFactory.getLogger (XMLValidator.class);
 
   public static void main (final String [] args)
   {
-    logger.addAppender (new ConsoleAppender (new SimpleLayout ()));
-    logger.setLevel (Level.INFO);
-
     final File aSchFile = new File ("../../../schematron/EN16931-EDIFACT-validation.sch");
     final File aXsltFile = new File ("../../../stylesheet/EN16931-EDIFACT-validation-compiled.xsl");
 
