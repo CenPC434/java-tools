@@ -150,16 +150,22 @@ public final class XMLValidator
     if (xmlFile == null || eMode == null || ruleFile == null)
     {
       final String sJarName = "en16931-xml-validator-x.y.z-jar-with-dependencies.jar";
-      s_aLogger.info ("Usage        XSD mode: java -jar " + sJarName + " -xml instance.xml -xsd schema.xsd");
-      s_aLogger.info ("Schematron plain mode: java -jar " +
-                      sJarName +
-                      " -xml instance.xml -sch schematron.sch [-svrl result.svrl]");
-      s_aLogger.info ("            XSLT mode: java -jar " +
-                      sJarName +
-                      " -xml instance.xml -xslt schematron.xslt [-svrl result.svrl]");
-      s_aLogger.info (" Pure Schematron mode: java -jar " +
-                      sJarName +
-                      " -xml instance.xml -pure schematron.xslt [-svrl result.svrl]");
+      s_aLogger.info ("Required commandline parameter is missing!");
+      s_aLogger.info ("Usage:");
+      s_aLogger.info ("  java -jar " + sJarName + " -xml file [-xsd|-sch|-xslt|-pure] file [-svrl file]");
+      s_aLogger.info ("With the following allowed options:");
+      s_aLogger.info ("   -xml filename");
+      s_aLogger.info ("       The XML file to be validated. This parameter is mandatory");
+      s_aLogger.info ("   -xsd filename");
+      s_aLogger.info ("       The XML schema (XSD) file used for validation");
+      s_aLogger.info ("   -sch filename");
+      s_aLogger.info ("       The Schematron file used for validation (using XSLT based validation)");
+      s_aLogger.info ("   -xslt filename");
+      s_aLogger.info ("       The precompiled Schematron XSLT file used for validation");
+      s_aLogger.info ("   -pure filename");
+      s_aLogger.info ("       The Schematron file used for validation (using Pure XPath-only validation)");
+      s_aLogger.info ("   -svrl filename");
+      s_aLogger.info ("       The SVRL file which should be written (only for Schematron validation)");
       return;
     }
 
