@@ -64,7 +64,7 @@ public class SimpleType
 		
 		for (int i=0; i<facets.length; ++i)
 		{
-			if (facets[i].equals(facetName))
+			if (facets[i].facetName.equals(facetName))
 				return facets[i].intValue;
 			if (fallbackName != null && facets[i].facetName.equals(fallbackName))
 				value = facets[i].intValue;
