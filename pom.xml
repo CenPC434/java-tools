@@ -99,17 +99,17 @@
       </dependency>
 
       <dependency>
-        <groupId>com.helger</groupId>
+        <groupId>com.helger.en16931</groupId>
         <artifactId>en16931-xml-validator</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>
-        <groupId>com.helger</groupId>
+        <groupId>com.helger.en16931</groupId>
         <artifactId>en16931-edifact-to-xml</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>
-        <groupId>com.helger</groupId>
+        <groupId>com.helger.en16931</groupId>
         <artifactId>en16931-edifact-xml</artifactId>
         <version>${project.version}</version>
       </dependency>
