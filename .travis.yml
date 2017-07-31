@@ -3,7 +3,12 @@ language: java
 env:
   global:
     - SONATYPE_USERNAME=ph@phloc.com
-    - secure: ""
+    - secure: "EQpJts6IvyBuRtYelNkIpcqrEfDUiwNPyxGF7qBWB2HMaQxEMXx1EfBR97CteAN9NufErht+M8W8Ju+7dv7MDzbCc4gMHciZ1i/y7rNuLw
+QvdxDrgEf78N5JLobo00qR7prfGEItnA9+y6VTdvwBLzcuUK768LkKoJbxLXbDOduAOPDNvaHQv91Emy5yBImjVzN4LitHK+kTjrU8JOkwDHmoRqN3e6f
+2deSUjrurmrwVSU0J1LDPePsdU4DB5Fh3OtXn8nvyAL+0bcMIAuRqAXS9PVZ81RPxD6frz8zpvngWnLOqzntK0vUfxPsvbUdU0br7z980QjpH3vwk8/c5
+WVg23lByGfYVRHQO8FvoU3h9rwnGIWAFnN5qfXa8WD51K+P8kDjrBL2RaX+XpB8wghyZBGCxAiswVkjuZJXHhBBmA3aETSYyjya0UxBh/BkUIy5TfeSKl
+4PA/ba1Mw1AXWNFpjfb2BrGylld76ItTn/TxJzCc3a0ytRodlslJCHocCjph8em2iz8iluo7Xsx0PfZsZrj4qbOzkZqGyDG1hLzri4wIz9feu+yu33Fbo
+b8BI5Oq/W565Z0b9zQy8LONorT28s9KGLXRtZfn6e1Q8Valr8r2rr90uD5HJ6ZKSUmORlK9E49L3dKvn6b/3w0DoewoihH4ZqCmTvuVqJ7SAw="
 
 jdk:
   - oraclejdk8
