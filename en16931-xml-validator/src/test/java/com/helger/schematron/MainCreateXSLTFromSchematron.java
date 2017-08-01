@@ -18,6 +18,8 @@ package com.helger.schematron;
 import java.io.File;
 import java.io.OutputStream;
 
+import javax.xml.XMLConstants;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -25,7 +27,6 @@ import com.helger.commons.io.file.FileHelper;
 import com.helger.schematron.svrl.CSVRL;
 import com.helger.schematron.xslt.ISchematronXSLTBasedProvider;
 import com.helger.schematron.xslt.SchematronResourceSCH;
-import com.helger.xml.CXML;
 import com.helger.xml.XMLHelper;
 import com.helger.xml.namespace.MapBasedNamespaceContext;
 import com.helger.xml.serialize.write.XMLWriter;
@@ -50,7 +51,7 @@ public class MainCreateXSLTFromSchematron
     final MapBasedNamespaceContext aNSContext = new MapBasedNamespaceContext ().addMapping ("svrl",
                                                                                             CSVRL.SVRL_NAMESPACE_URI);
     // Add all namespaces from XSLT document root
-    final String sNSPrefix = CXML.XML_ATTR_XMLNS + ":";
+    final String sNSPrefix = XMLConstants.XMLNS_ATTRIBUTE + ":";
     XMLHelper.getAllAttributesAsMap (aXsltProvider.getXSLTDocument ().getDocumentElement ())
              .forEach ( (sAttrName, sAttrValue) -> {
                if (sAttrName.startsWith (sNSPrefix))
