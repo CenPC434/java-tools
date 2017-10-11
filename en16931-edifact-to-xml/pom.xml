@@ -33,6 +33,7 @@
         <extensions>true</extensions>
         <configuration>
           <instructions>
+            <Automatic-Module-Name>eu.cen.en16931.edifact_to_xml</Automatic-Module-Name>
             <Export-Package>eu.cen.en16931.edifact_to_xml.*</Export-Package>
             <Import-Package>!javax.annotation.*,*</Import-Package>
           </instructions>
