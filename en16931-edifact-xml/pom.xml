@@ -25,6 +25,10 @@
   </parent>
   <artifactId>en16931-edifact-xml</artifactId>
   <packaging>bundle</packaging>
+  <name>en16931-edifact-xml</name>
+  <description>JAXB generated domain objects for the special EDIFACT ISO 20625 XML dialect used in EN 16931</description>
+  <url>https://github.com/CenPc434/java-tools/en16931-edifact-xml</url>
+  <inceptionYear>2017</inceptionYear>
   <dependencies>
     <dependency>
       <groupId>com.helger</groupId>

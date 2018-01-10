@@ -25,8 +25,12 @@
   </parent>
   <artifactId>en16931-xml-validator</artifactId>
   <packaging>jar</packaging>
+  <name>en16931-xml-validator</name>
+  <description>A generic XML validator that supports validation of XML files against arbitrary XML Schemas as well as Schematron files. It is meant to be used as a standalone application.</description>
+  <url>https://github.com/CenPc434/java-tools/en16931-xml-validator</url>
+  <inceptionYear>2017</inceptionYear>
   <properties>
-    <log4j.version>2.9.1</log4j.version>
+    <log4j.version>2.10.0</log4j.version>
   </properties>
   <dependencies>
     <dependency>

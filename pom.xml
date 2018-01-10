@@ -29,7 +29,7 @@
   <packaging>pom</packaging>
   <name>en16931-parent-pom</name>
   <description>Base POM to build the EN 16931 projects</description>
-  <url>https://github.com/CenPC434/java-tools</url>
+  <url>https://github.com/CenPc434/java-tools</url>
   <inceptionYear>2017</inceptionYear>
  
   <licenses>

@@ -25,6 +25,10 @@
   </parent>
   <artifactId>en16931-edifact-to-xml</artifactId>
   <packaging>bundle</packaging>
+  <name>en16931-edifact-to-xml</name>
+  <description>The Altova Mapforce generated code to convert EDIFACT text files to ISO 20625 EDIFACT XML files</description>
+  <url>https://github.com/CenPc434/java-tools/en16931-edifact-to-xml</url>
+  <inceptionYear>2017</inceptionYear>
   <build>
     <plugins>
       <plugin>
