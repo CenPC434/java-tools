@@ -29,6 +29,13 @@
   <description>A generic XML validator that supports validation of XML files against arbitrary XML Schemas as well as Schematron files. It is meant to be used as a standalone application.</description>
   <url>https://github.com/CenPc434/java-tools/en16931-xml-validator</url>
   <inceptionYear>2017</inceptionYear>
+  <licenses>
+    <license>
+      <name>Apache 2</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
   <properties>
     <log4j.version>2.10.0</log4j.version>
   </properties>

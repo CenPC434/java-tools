@@ -29,6 +29,13 @@
   <description>JAXB generated domain objects for the special EDIFACT ISO 20625 XML dialect used in EN 16931</description>
   <url>https://github.com/CenPc434/java-tools/en16931-edifact-xml</url>
   <inceptionYear>2017</inceptionYear>
+  <licenses>
+    <license>
+      <name>Apache 2</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
   <dependencies>
     <dependency>
       <groupId>com.helger</groupId>
@@ -62,7 +69,7 @@
       <plugin>
         <groupId>org.jvnet.jaxb2.maven2</groupId>
         <artifactId>maven-jaxb2-plugin</artifactId>
-        <version>0.13.2</version>
+        <version>0.13.3</version>
         <executions>
           <execution>
             <goals>

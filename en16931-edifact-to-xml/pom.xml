@@ -29,6 +29,13 @@
   <description>The Altova Mapforce generated code to convert EDIFACT text files to ISO 20625 EDIFACT XML files</description>
   <url>https://github.com/CenPc434/java-tools/en16931-edifact-to-xml</url>
   <inceptionYear>2017</inceptionYear>
+  <licenses>
+    <license>
+      <name>Apache 2</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
   <build>
     <plugins>
       <plugin>
