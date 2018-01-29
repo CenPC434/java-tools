@@ -21,7 +21,7 @@
   <parent>
     <groupId>com.helger</groupId>
     <artifactId>parent-pom</artifactId>
-    <version>1.9.3</version>
+    <version>1.10.0</version>
   </parent>
   <groupId>com.helger.en16931</groupId>
   <artifactId>en16931-parent-pom</artifactId>
