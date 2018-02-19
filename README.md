@@ -50,4 +50,6 @@ A generic XML validator that supports validation of XML files against arbitrary 
 ```
 
 ---
-Contact: if you have any questions, send a mail to en16931[at]helger[dot]com
+
+My personal [Coding Styleguide](https://github.com/phax/meta/blob/master/CodingStyleguide.md) |
+On Twitter: <a href="https://twitter.com/philiphelger">@philiphelger</a>
