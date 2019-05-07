@@ -72,7 +72,7 @@
       <dependency>
         <groupId>com.helger</groupId>
         <artifactId>ph-jaxb-pom</artifactId>
-        <version>1.0.2</version>
+        <version>1.0.3</version>
         <type>pom</type>
       </dependency>
       <dependency>
