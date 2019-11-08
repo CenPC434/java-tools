@@ -21,7 +21,7 @@
   <parent>
     <groupId>com.helger</groupId>
     <artifactId>parent-pom</artifactId>
-    <version>1.10.9</version>
+    <version>1.11.0</version>
   </parent>
   <groupId>com.helger.en16931</groupId>
   <artifactId>en16931-parent-pom</artifactId>
@@ -78,7 +78,7 @@
       <dependency>
         <groupId>com.helger</groupId>
         <artifactId>ph-commons-parent-pom</artifactId>
-        <version>9.3.7</version>
+        <version>9.3.8</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
