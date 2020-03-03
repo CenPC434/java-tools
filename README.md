@@ -1,3 +1,7 @@
+# This project is no longer maintained
+
+If you are looking for a validation engine to validate EN 16931 documents, you may have a look at BDVE (https://github.com/phax/ph-bdve/)
+
 # java-tools
 This GitHub project contains Java libraries to support CEN TC/434 / EN 16931.
 This is the standard for the European data model for electronic invoices.
