@@ -35,11 +35,11 @@ import com.helger.commons.io.resource.FileSystemResource;
 import com.helger.schematron.ISchematronResource;
 import com.helger.schematron.SchematronHelper;
 import com.helger.schematron.pure.SchematronResourcePure;
+import com.helger.schematron.sch.SchematronResourceSCH;
 import com.helger.schematron.svrl.SVRLFailedAssert;
 import com.helger.schematron.svrl.SVRLHelper;
 import com.helger.schematron.svrl.SVRLMarshaller;
 import com.helger.schematron.svrl.jaxb.SchematronOutputType;
-import com.helger.schematron.xslt.SchematronResourceSCH;
 import com.helger.schematron.xslt.SchematronResourceXSLT;
 import com.helger.xml.schema.XMLSchemaCache;
 import com.helger.xml.transform.TransformSourceFactory;
@@ -52,7 +52,7 @@ public final class XMLValidator
 {
   private static final Logger s_aLogger = LoggerFactory.getLogger (XMLValidator.class);
 
-  private static enum EMode
+  private enum EMode
   {
     XSD ("XML schema"),
     PURE ("Pure Schematron"),
@@ -226,8 +226,7 @@ public final class XMLValidator
     final ICommonsList <SVRLFailedAssert> aFailedAsserts = SVRLHelper.getAllFailedAssertions (aSOT);
     if (aFailedAsserts.isNotEmpty ())
     {
-      s_aLogger.info ("XML does not comply to Schematron!" +
-                      (svrlPath != null ? " See SVRL for details: " + svrlPath : ""));
+      s_aLogger.info ("XML does not comply to Schematron!" + (svrlPath != null ? " See SVRL for details: " + svrlPath : ""));
       return false;
     }
 

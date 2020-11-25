@@ -11,6 +11,10 @@ All projects contained in here are Apache 2 licensed.
 
 ## News and noteworthy:
 
+* v2.0.3 - 2020-11-25
+    * Adopted to ph-schematron 6.0.0
+* v2.0.2 - 2020-09-17
+    * Version updates    
 * v2.0.1 - 2018-11-22
     * Adopted to ph-commons 9.2.0
 * v2.0.0 - 2018-01-05
@@ -25,11 +29,12 @@ It is a standalone tool without dependencies but nevertheless can also be used i
 
 
 **Maven usage:**
+
 ```xml
 <dependency>
   <groupId>com.helger.en16931</groupId>
   <artifactId>en16931-edifact-to-xml</artifactId>
-  <version>2.0.1</version>
+  <version>2.0.3</version>
 </dependency>
 ```
 
@@ -43,7 +48,7 @@ JAXB generated domain objects for the special EDIFACT ISO 20625 XML dialect used
 <dependency>
   <groupId>com.helger.en16931</groupId>
   <artifactId>en16931-edifact-xml</artifactId>
-  <version>2.0.1</version>
+  <version>2.0.3</version>
 </dependency>
 ```
 
@@ -57,7 +62,7 @@ A generic XML validator that supports validation of XML files against arbitrary 
 <dependency>
   <groupId>com.helger.en16931</groupId>
   <artifactId>en16931-xml-validator</artifactId>
-  <version>2.0.1</version>
+  <version>2.0.3</version>
 </dependency>
 ```
 

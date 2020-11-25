@@ -40,7 +40,7 @@
   </licenses>
   
   <properties>
-    <log4j.version>2.13.3</log4j.version>
+    <log4j.version>2.14.0</log4j.version>
   </properties>
   
   <dependencies>
@@ -49,8 +49,12 @@
       <artifactId>ph-jaxb</artifactId>
     </dependency>
     <dependency>
-      <groupId>com.helger</groupId>
-      <artifactId>ph-schematron</artifactId>
+      <groupId>com.helger.schematron</groupId>
+      <artifactId>ph-schematron-xslt</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.helger.schematron</groupId>
+      <artifactId>ph-schematron-pure</artifactId>
     </dependency>
     <dependency>
       <groupId>org.apache.logging.log4j</groupId>

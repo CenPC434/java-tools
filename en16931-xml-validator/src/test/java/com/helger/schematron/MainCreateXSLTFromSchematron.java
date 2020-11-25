@@ -24,9 +24,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.helger.commons.io.file.FileHelper;
+import com.helger.schematron.api.xslt.ISchematronXSLTBasedProvider;
+import com.helger.schematron.sch.SchematronResourceSCH;
 import com.helger.schematron.svrl.CSVRL;
-import com.helger.schematron.xslt.ISchematronXSLTBasedProvider;
-import com.helger.schematron.xslt.SchematronResourceSCH;
 import com.helger.xml.XMLHelper;
 import com.helger.xml.namespace.MapBasedNamespaceContext;
 import com.helger.xml.serialize.write.XMLWriter;
@@ -48,15 +48,13 @@ public class MainCreateXSLTFromSchematron
     final ISchematronXSLTBasedProvider aXsltProvider = aSch.getXSLTProvider ();
 
     // Write the resulting XSLT file to disk
-    final MapBasedNamespaceContext aNSContext = new MapBasedNamespaceContext ().addMapping ("svrl",
-                                                                                            CSVRL.SVRL_NAMESPACE_URI);
+    final MapBasedNamespaceContext aNSContext = new MapBasedNamespaceContext ().addMapping ("svrl", CSVRL.SVRL_NAMESPACE_URI);
     // Add all namespaces from XSLT document root
     final String sNSPrefix = XMLConstants.XMLNS_ATTRIBUTE + ":";
-    XMLHelper.getAllAttributesAsMap (aXsltProvider.getXSLTDocument ().getDocumentElement ())
-             .forEach ( (sAttrName, sAttrValue) -> {
-               if (sAttrName.startsWith (sNSPrefix))
-                 aNSContext.addMapping (sAttrName.substring (sNSPrefix.length ()), sAttrValue);
-             });
+    XMLHelper.getAllAttributesAsMap (aXsltProvider.getXSLTDocument ().getDocumentElement ()).forEach ( (sAttrName, sAttrValue) -> {
+      if (sAttrName.startsWith (sNSPrefix))
+        aNSContext.addMapping (sAttrName.substring (sNSPrefix.length ()), sAttrValue);
+    });
 
     final XMLWriterSettings aXWS = new XMLWriterSettings ();
     aXWS.setNamespaceContext (aNSContext).setPutNamespaceContextPrefixesInRoot (true);
