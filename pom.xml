@@ -21,7 +21,7 @@
   <parent>
     <groupId>com.helger</groupId>
     <artifactId>parent-pom</artifactId>
-    <version>1.11.2</version>
+    <version>1.11.3</version>
   </parent>
   <groupId>com.helger.en16931</groupId>
   <artifactId>en16931-parent-pom</artifactId>
@@ -92,7 +92,7 @@
       <dependency>
         <groupId>com.helger.schematron</groupId>
         <artifactId>ph-schematron-parent-pom</artifactId>
-        <version>6.0.0</version>
+        <version>6.0.2</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
