@@ -50,7 +50,7 @@ import com.helger.xml.transform.TransformSourceFactory;
  */
 public final class XMLValidator
 {
-  private static final Logger s_aLogger = LoggerFactory.getLogger (XMLValidator.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger (XMLValidator.class);
 
   private enum EMode
   {
@@ -61,7 +61,7 @@ public final class XMLValidator
 
     private final String m_sName;
 
-    private EMode (@Nonnull @Nonempty final String sName)
+    EMode (@Nonnull @Nonempty final String sName)
     {
       m_sName = sName;
     }
@@ -96,10 +96,10 @@ public final class XMLValidator
         if (f.exists () && f.isFile ())
           xmlFile = f;
         else
-          s_aLogger.error ("The xml instance file '" + sValue + "' does not exist.");
+          LOGGER.error ("The xml instance file '" + sValue + "' does not exist.");
       }
       else
-        s_aLogger.error ("Invalidate file type '" + sType + "' provided (try '-xml').");
+        LOGGER.error ("Invalidate file type '" + sType + "' provided (try '-xml').");
     }
 
     if (args.length >= 4)
@@ -124,10 +124,10 @@ public final class XMLValidator
         if (f.exists () && f.isFile ())
           ruleFile = f;
         else
-          s_aLogger.error ("The " + eMode.getDisplayName () + " file '" + sValue + "' does not exist.");
+          LOGGER.error ("The " + eMode.getDisplayName () + " file '" + sValue + "' does not exist.");
       }
       else
-        s_aLogger.error ("Invalid validation mode '" + sType + "' provided.");
+        LOGGER.error ("Invalid validation mode '" + sType + "' provided.");
     }
 
     if (args.length >= 6)
@@ -141,47 +141,47 @@ public final class XMLValidator
         if (!f.exists () || f.isFile ())
           svrlFile = f;
         else
-          s_aLogger.error ("The SVRL file '" + sValue + "' does not exist.");
+          LOGGER.error ("The SVRL file '" + sValue + "' does not exist.");
       }
       else
-        s_aLogger.error ("Invalid optional type '" + sType + "' provided.");
+        LOGGER.error ("Invalid optional type '" + sType + "' provided.");
     }
 
     if (xmlFile == null || eMode == null || ruleFile == null)
     {
       final String sJarName = "en16931-xml-validator-x.y.z-jar-with-dependencies.jar";
-      s_aLogger.info ("Required commandline parameter is missing!");
-      s_aLogger.info ("Usage:");
-      s_aLogger.info ("  java -jar " + sJarName + " -xml file [-xsd|-sch|-xslt|-pure] file [-svrl file]");
-      s_aLogger.info ("With the following allowed options:");
-      s_aLogger.info ("   -xml filename");
-      s_aLogger.info ("       The XML file to be validated. This parameter is mandatory");
-      s_aLogger.info ("   -xsd filename");
-      s_aLogger.info ("       The XML schema (XSD) file used for validation");
-      s_aLogger.info ("   -sch filename");
-      s_aLogger.info ("       The Schematron file used for validation (using XSLT based validation)");
-      s_aLogger.info ("   -xslt filename");
-      s_aLogger.info ("       The precompiled Schematron XSLT file used for validation");
-      s_aLogger.info ("   -pure filename");
-      s_aLogger.info ("       The Schematron file used for validation (using Pure XPath-only validation)");
-      s_aLogger.info ("   -svrl filename");
-      s_aLogger.info ("       The SVRL file which should be written (only for Schematron validation)");
+      LOGGER.info ("Required commandline parameter is missing!");
+      LOGGER.info ("Usage:");
+      LOGGER.info ("  java -jar " + sJarName + " -xml file [-xsd|-sch|-xslt|-pure] file [-svrl file]");
+      LOGGER.info ("With the following allowed options:");
+      LOGGER.info ("   -xml filename");
+      LOGGER.info ("       The XML file to be validated. This parameter is mandatory");
+      LOGGER.info ("   -xsd filename");
+      LOGGER.info ("       The XML schema (XSD) file used for validation");
+      LOGGER.info ("   -sch filename");
+      LOGGER.info ("       The Schematron file used for validation (using XSLT based validation)");
+      LOGGER.info ("   -xslt filename");
+      LOGGER.info ("       The precompiled Schematron XSLT file used for validation");
+      LOGGER.info ("   -pure filename");
+      LOGGER.info ("       The Schematron file used for validation (using Pure XPath-only validation)");
+      LOGGER.info ("   -svrl filename");
+      LOGGER.info ("       The SVRL file which should be written (only for Schematron validation)");
       return;
     }
 
-    s_aLogger.info ("=========================================");
+    LOGGER.info ("=========================================");
     if (eMode == EMode.XSD)
     {
-      s_aLogger.info ("Starting validation against XML Schema");
-      s_aLogger.info ("Result: " + validateXMLSchema (ruleFile, xmlFile));
+      LOGGER.info ("Starting validation against XML Schema");
+      LOGGER.info ("Result: " + validateXMLSchema (ruleFile, xmlFile));
     }
     else
     {
-      s_aLogger.info ("Starting validation against Schematron");
-      s_aLogger.info ("Result: " + validateXMLSchematron (ruleFile, eMode, xmlFile, svrlFile));
+      LOGGER.info ("Starting validation against Schematron");
+      LOGGER.info ("Result: " + validateXMLSchematron (ruleFile, eMode, xmlFile, svrlFile));
     }
-    s_aLogger.info ("Finished.");
-    s_aLogger.info ("=========================================");
+    LOGGER.info ("Finished.");
+    LOGGER.info ("=========================================");
   }
 
   public static boolean validateXMLSchema (@Nonnull final File xsdPath, @Nonnull final File xmlPath)
@@ -194,7 +194,7 @@ public final class XMLValidator
     }
     catch (final IOException | SAXException e)
     {
-      s_aLogger.info ("Exception: " + e.getMessage ());
+      LOGGER.info ("Exception: " + e.getMessage ());
       return false;
     }
     return true;
@@ -215,7 +215,7 @@ public final class XMLValidator
     final SchematronOutputType aSOT = SchematronHelper.applySchematron (aSchematron, aXML);
     if (aSOT == null)
     {
-      s_aLogger.info ("Schematron file " + aSchematron + " is malformed!");
+      LOGGER.info ("Schematron file " + aSchematron + " is malformed!");
       return false;
     }
 
@@ -226,11 +226,12 @@ public final class XMLValidator
     final ICommonsList <SVRLFailedAssert> aFailedAsserts = SVRLHelper.getAllFailedAssertions (aSOT);
     if (aFailedAsserts.isNotEmpty ())
     {
-      s_aLogger.info ("XML does not comply to Schematron!" + (svrlPath != null ? " See SVRL for details: " + svrlPath : ""));
+      LOGGER.info ("XML does not comply to Schematron!" +
+                   (svrlPath != null ? " See SVRL for details: " + svrlPath : ""));
       return false;
     }
 
-    s_aLogger.info ("XML complies to Schematron!");
+    LOGGER.info ("XML complies to Schematron!");
     return true;
   }
 }
