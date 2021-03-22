@@ -11,7 +11,7 @@ All projects contained in here are Apache 2 licensed.
 
 ## News and noteworthy:
 
-* v2.0.4 - work in progress
+* v2.0.4 - 2021-03-22
     * Updated to ph-commons 10
 * v2.0.3 - 2020-11-25
     * Adopted to ph-schematron 6.0.0
